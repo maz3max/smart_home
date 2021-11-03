@@ -1,0 +1,62 @@
+  version: '3'
+  services:
+    zigbee2mqtt:
+      image: koenkk/zigbee2mqtt:1.21.2
+      volumes:
+        - ./zigbee2mqtt:/app/data
+        - /run/udev:/run/udev:ro
+      devices:
+        - /dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B000FFB7CBF-if00:/dev/ttyACM0
+      restart: always
+      environment:
+        - TZ=Europe/Berlin
+      ports:
+        - 8080:8080
+    mqtt:
+      image: eclipse-mosquitto:2.0.13
+      restart: always
+      volumes:
+        - ./mosquitto/config:/mosquitto/config
+        - ./mosquitto/data:/mosquitto/data
+        - ./mosquitto/log:/mosquitto/log
+      ports:
+        - 1883:1883
+        - 9001:9001
+    homeassistant:
+      restart: unless-stopped
+      image: homeassistant/home-assistant:2021.11
+      volumes:
+        - ./homeassistant:/config
+        - /etc/localtime:/etc/localtime:ro
+      environment:
+        - TZ=Europe/Berlin
+      ports:
+        - 8123:8123
+    node_red:
+      restart: unless-stopped
+      image: nodered/node-red:2.1.3
+      volumes:
+        - ./node_red:/data
+      environment:
+        - TZ=Europe/Berlin
+      ports:
+        - 1880:1880
+    mqtt-exporter:
+      image: kpetrem/mqtt-exporter
+      # this image does not have tags :/
+      ports:
+        - 9000:9000
+      environment:
+        - MQTT_ADDRESS=mqtt
+        - MQTT_USERNAME=test
+        - MQTT_PASSWORD=very-secure-password
+      restart: unless-stopped
+    #iobroker:
+    #  restart: always
+    #  image: buanet/iobroker:v5.2.0
+    #  container_name: iobroker
+    #  hostname: iobroker
+    #  ports:
+    #    - "8081:8081"
+    #  volumes:
+    #    - ./iobroker:/opt/iobroker

@@ -1,0 +1,22 @@
+homeassistant: true
+permit_join: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mqtt
+  user: test
+  password: very-secure-password
+serial:
+  port: /dev/ttyACM0
+advanced:
+  ikea_ota_use_test_url: true
+  legacy_api: true
+  log_level: info
+  pan_id: GENERATE
+  network_key: GENERATE
+    # Optional: ZigBee channel, changing requires re-pairing of all devices. (Note: use a ZLL channel: 11, 15, 20, or 25 to avoid Problems)
+  channel: 11
+frontend:
+  port: 8080
+groups: {}
+ota:
+  disable_automatic_update_check: true

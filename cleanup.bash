@@ -1,0 +1,10 @@
+rm -rf homeassistant/*
+rm -rf homeassistant/.storage
+rm -rf homeassistant/.cloud
+rm -rf homeassistant/.HA_VERSION
+rm -rf node_red/*
+rm -rf node_red/.npm
+rm -rf node_red/.config*
+rm -rf zigbee2mqtt/*
+rm -rf mosquitto/data
+rm -rf mosquitto/log
