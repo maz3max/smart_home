@@ -41,15 +41,33 @@
         - TZ=Europe/Berlin
       ports:
         - 1880:1880
+    prometheus:
+      image: prom/prometheus:v2.31.0
+      volumes:
+        - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+        - ./prometheus/storage/:/prometheus/
+      ports:
+        - 9090:9090
+      restart: unless-stopped
     mqtt-exporter:
       image: kpetrem/mqtt-exporter
       # this image does not have tags :/
-      ports:
-        - 9000:9000
       environment:
         - MQTT_ADDRESS=mqtt
         - MQTT_USERNAME=test
         - MQTT_PASSWORD=very-secure-password
+      restart: unless-stopped
+    node-exporter:
+      image: prom/node-exporter:v1.2.2
+      volumes:
+        - /proc:/host/proc:ro
+        - /sys:/host/sys:ro
+        - /:/rootfs:ro
+      command: 
+        - '--path.procfs=/host/proc' 
+        - '--path.sysfs=/host/sys'
+        - --collector.filesystem.ignored-mount-points
+        - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
       restart: unless-stopped
     #iobroker:
     #  restart: always
