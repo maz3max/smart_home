@@ -20,3 +20,5 @@ frontend:
 groups: {}
 ota:
   disable_automatic_update_check: true
+device_options:
+  legacy: true
