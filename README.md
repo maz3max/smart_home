@@ -17,7 +17,7 @@ A zigbee coordinator smart home bundle including:
 
 # How to setup
 1. adjust the name of the coordinator serial port in `docker-compose.yml`
-2. adjust `MQTT_USER` and `MQTT_PW` in initialize.bash
+2. adjust `MQTT_USER` and `MQTT_PW` in `initialize.bash`. These will be the credentials of your new MQTT server.
 3. run `initialize.bash`
 4. nodeRed, install `node-red-contrib-tasmota` and `node-red-contrib-zigbee2mqtt` in settings->palette
 5. if you want to use nodeRed's zigbee2mqtt plugin, you have to enable the legacy-api in `configuration.yml`
