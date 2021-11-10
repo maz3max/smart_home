@@ -21,5 +21,3 @@ sudo chown -R 472 grafana/
 
 mkdir -p prometheus/storage
 sudo chown -R 65534 prometheus/
-
-# in nodeRed, install node-red-contrib-tasmota and node-red-contrib-zigbee2mqtt in settings->palette

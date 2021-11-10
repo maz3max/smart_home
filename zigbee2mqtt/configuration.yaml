@@ -13,12 +13,10 @@ advanced:
   log_level: info
   pan_id: GENERATE
   network_key: GENERATE
-    # Optional: ZigBee channel, changing requires re-pairing of all devices. (Note: use a ZLL channel: 11, 15, 20, or 25 to avoid Problems)
+# Optional: ZigBee channel, changing requires re-pairing of all devices. (Note: use a ZLL channel: 11, 15, 20, or 25 to avoid Problems)
   channel: 11
 frontend:
   port: 8080
 groups: {}
 ota:
   disable_automatic_update_check: true
-device_options:
-  legacy: true
